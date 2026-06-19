@@ -40,28 +40,32 @@ build {
   # 2. Aprovisionamiento automatizado
   provisioner "shell" {
     inline = [
-      "echo 'Esperando a que apt termine de inicializar...'",
-      "sleep 10",
-      "sudo apt-get update",
-      "sudo apt-get install -y nginx nodejs npm",
+      # 1. Esperar a que el sistema esté listo
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Esperando a cloud-init...'; sleep 2; done",
       
-      # Instalación de PM2
+      # 2. Actualizar repositorios
+      "sudo apt-get update -y",
+      "sudo apt-get install -y nginx curl",
+      
+      # 3. Instalación moderna de Node.js (v20 LTS)
+      "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -",
+      "sudo apt-get install -y nodejs",
+      
+      # 4. Instalación de PM2
       "sudo npm install -g pm2",
       
-      # Configuración de Nginx
+      # 5. Configuración de Nginx
       "sudo mv /tmp/nginx.conf /etc/nginx/sites-available/default",
       "sudo systemctl restart nginx",
       
-      # Configuración de la App
+      # 6. Configuración de la App
       "sudo mkdir -p /var/www/html",
       "sudo mv /tmp/hello.js /var/www/html/hello.js",
       "sudo chown -R ubuntu:ubuntu /var/www/html",
       
-      # Gestión de procesos con PM2
+      # 7. Gestión de procesos con PM2
       "pm2 start /var/www/html/hello.js --name hello",
       "pm2 save",
-      
-      # Automatización del inicio del sistema (Startup)
       "sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
     ]
   }
