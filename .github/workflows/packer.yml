@@ -22,6 +22,13 @@ jobs:
       - name: Packer Build
         run: packer build template.pkr.hcl
         env:
+          # AWS
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+
+          # Azure
+          PKR_VAR_azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+          PKR_VAR_azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          PKR_VAR_azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          PKR_VAR_azure_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
