@@ -1,3 +1,8 @@
+variable "azure_client_id" { type = string }
+variable "azure_client_secret" { type = string }
+variable "azure_subscription_id" { type = string }
+variable "azure_tenant_id" { type = string }
+
 packer {
   required_plugins {
     amazon = {
@@ -28,10 +33,10 @@ source "amazon-ebs" "ubuntu" {
 }
 
 source "azure-arm" "ubuntu" {
-  client_id       = "${var.azure_client_id}"
-  client_secret   = "${var.azure_client_secret}"
-  subscription_id = "${var.azure_subscription_id}"
-  tenant_id       = "${var.azure_tenant_id}"
+  client_id       = var.azure_client_id
+  client_secret   = var.azure_client_secret
+  subscription_id = var.azure_subscription_id
+  tenant_id       = var.azure_tenant_id
   
   managed_image_name                = "node-nginx-app-v1-{{timestamp}}"
   managed_image_resource_group_name = "tu-grupo-de-recursos"
