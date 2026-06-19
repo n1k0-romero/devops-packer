@@ -47,7 +47,7 @@ source "azure-arm" "ubuntu" {
   image_offer     = "0001-com-ubuntu-server-jammy"
   image_sku       = "22_04-lts"
   
-  location = "East US"
+  location = "East US 2"
   vm_size  = "Standard_D2s_v3"
 }
 
