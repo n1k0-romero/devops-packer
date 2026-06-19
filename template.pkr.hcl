@@ -23,8 +23,29 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 }
 
+source "azure-arm" "ubuntu" {
+  client_id       = "${var.azure_client_id}"
+  client_secret   = "${var.azure_client_secret}"
+  subscription_id = "${var.azure_subscription_id}"
+  tenant_id       = "${var.azure_tenant_id}"
+  
+  managed_image_name                = "node-nginx-app-v1-{{timestamp}}"
+  managed_image_resource_group_name = "tu-grupo-de-recursos"
+  
+  os_type         = "Linux"
+  image_publisher = "Canonical"
+  image_offer     = "0001-com-ubuntu-server-jammy"
+  image_sku       = "22_04-lts"
+  
+  location = "East US"
+  vm_size  = "Standard_B1s"
+}
+
 build {
-  sources = ["source.amazon-ebs.ubuntu"]
+  sources = [
+    "source.amazon-ebs.ubuntu",
+    "source.azure-arm.ubuntu"
+  ]
 
   # 1. Copiar archivos necesarios al servidor
   provisioner "file" {
