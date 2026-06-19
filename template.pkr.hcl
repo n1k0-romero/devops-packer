@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "node-nginx-app-v1"
+  ami_name      = "node-nginx-app-v1-{{timestamp}}"
   instance_type = "t3.micro"
   region        = "us-east-1"
   source_ami_filter {
