@@ -1,0 +1,45 @@
+
+Actividad: Despliegue de Nginx y Nodejs mediante una imagen generada por Packer
+
+Objetivos
+
+En esta actividad, aprenderás a utilizar Packer mediante un ejemplo sencillo, pero con una stack (pila) tecnológica muy utilizada. Los objetivos que se pretenden conseguir son los siguientes:
+
+	•	Aplicar la herramienta a la adaptación de unas instrucciones a automatismos para crear imágenes reutilizables.
+	•	Crear una template (plantilla) de Packer que te permita generar una imagen con una aplicación con Node.js ya instalada y configurada con Nginx como servidor web. 
+	•	Realizar el despliegue en una nube pública (se recomienda Amazon AWS, pero es opcional).
+	•	Ejecutar un despliegue automático, sin intervención manual.
+
+Descripción
+
+Para realizar la práctica, partiremos de la siguiente guía: 
+
+Juell, K. y Tagliaferri, L. (2021, 31 de marzo). How to set up a Node.js application for production on Ubuntu 20.04. DigitalOcean. 
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04
+
+
+Esta guía pretende ser orientativa; debes automatizar los pasos de instalación y aplicarlos mediante Packer sobre otra nube distinta. Por tanto, has de adaptar todos los elementos que sean necesarios
+
+Elige la AMI de base para la región a través del siguiente enlace: 
+https://cloud-images.ubuntu.com/locator/ec2/
+
+Ten en cuenta que, si usas t2.micro (lo recomendado), el tipo de instancia es HVM. Por favor, utiliza una imagen con disco EBS en lugar de una instance store. 
+
+Encuentra información adicional en este enlace: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+
+
+	•	Ejercicio 1: creación de una template de Packer. Con el proyecto seleccionado, debes crear una template (plantilla) de Packer que te permita generar una imagen mediante una aplicación con Node.js ya instalada y configurada con Nginx como servidor web. Para desarrollar la plantilla, aplica la información que se recoge en el enlace de apoyo proporcionado con anterioridad. En esta tarea, se tendrá en cuenta el uso de IP pública.
+
+	•	Ejercicio 2: despliegue sin intervención manual. Ahora, debes modificar la imagen y la template de la tarea anterior de tal forma que la imagen se cree y el despliegue completo se realice de forma automática, sin intervención manual. Te aconsejamos revisar documentación del proveedor para utilizar el CLI.
+
+	•	Ejercicio 3: despliegue multinube. Añade un builder de otro tipo para una nube pública (secundario AZURE) en caso de usar otro proveedor y justifica su uso.
+
+Formato y extensión máxima de la actividad 
+
+Se deberá entregar un documento que incluya un índice de contenidos y la resolución de cada ejercicio bien explicada y detallada. Además, en caso de ser necesario, se incluirán capturas o imágenes que muestren resultados o detalles. 
+
+Asimismo, se adjuntará la template realizada y los ficheros complementarios, así como el log de ejecución de realización de despliegues.
+
+Se considerará la necesidad justificada de una mayor extensión siempre que el contenido sea adecuado y necesario. 
+
+En cada criterio, para la puntuación, además de lo incluido en la descripción, se valorará la capacidad de análisis en las explicaciones y razonamientos en general, así como una adecuada presentación del documento.
