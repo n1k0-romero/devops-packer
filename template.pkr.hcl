@@ -2,6 +2,7 @@ variable "azure_client_id" { type = string }
 variable "azure_client_secret" { type = string }
 variable "azure_subscription_id" { type = string }
 variable "azure_tenant_id" { type = string }
+variable "azure_resource_group" { type = string }
 
 packer {
   required_plugins {
@@ -39,7 +40,7 @@ source "azure-arm" "ubuntu" {
   tenant_id       = var.azure_tenant_id
   
   managed_image_name                = "node-nginx-app-v1-{{timestamp}}"
-  managed_image_resource_group_name = "tu-grupo-de-recursos"
+  managed_image_resource_group_name = var.azure_resource_group
   
   os_type         = "Linux"
   image_publisher = "Canonical"
@@ -52,8 +53,8 @@ source "azure-arm" "ubuntu" {
 
 build {
   sources = [
-    "source.amazon-ebs.ubuntu",
-    "source.azure-arm.ubuntu"
+    "source.azure-arm.ubuntu",
+    "source.amazon-ebs.ubuntu"
   ]
 
   # 1. Copiar archivos necesarios al servidor
