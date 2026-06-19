@@ -48,7 +48,7 @@ source "azure-arm" "ubuntu" {
   image_sku       = "22_04-lts"
   
   location = "East US"
-  vm_size  = "Standard_B1s"
+  vm_size  = "Standard_D2s_v3"
 }
 
 build {
