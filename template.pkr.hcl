@@ -92,12 +92,15 @@ build {
       # 6. Configuración de la App
       "sudo mkdir -p /var/www/html",
       "sudo mv /tmp/hello.js /var/www/html/hello.js",
-      "sudo chown -R ubuntu:ubuntu /var/www/html",
+      
+      # Usar $USER detecta automáticamente el usuario que está corriendo el script
+      "sudo chown -R $USER:$USER /var/www/html", 
       
       # 7. Gestión de procesos con PM2
       "pm2 start /var/www/html/hello.js --name hello",
       "pm2 save",
-      "sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
+      # Usar $USER aquí también es más seguro
+      "sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $USER --hp /home/$USER"
     ]
   }
 }
